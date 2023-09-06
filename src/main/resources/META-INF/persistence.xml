@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
-    http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
-             version="2.1">
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+             version="2.2">
+    <persistence-unit name="produtoPU"> <!-- nome da unidade de persistência -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-    <persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
+        <!-- Configurações de conexão com o banco de dados -->
         <properties>
-            <property name="hibernate.connection.url" value="jdbc:postgresql://silly.db.elephantsql.com/ewxwujuz"/>
-            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+            <!-- Driver do banco de dados -->
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
 
+            <!-- URL de conexão com o banco de dados -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:testdb"/>
 
-            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
-            <property name="javax.persistence.jdbc.user" value="ewxwujuz" />
-            <property name="javax.persistence.jdbc.password" value="yZ960hnOCepPa_hOEDrthT9VT5sA7hDW" />
+            <!-- Nome de usuário e senha do banco de dados -->
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+            <property name="javax.persistence.jdbc.password" value="password"/>
 
-            <property name="hibernate.hbm2ddl.auto" value="update" />
-
-            <!-- https://docs.jboss.org/hibernate/orm/5.4/javadocs/org/hibernate/dialect/package-summary.html -->
-            <property name="hibernate.dialect" 	value="org.hibernate.dialect.PostgreSQL82Dialect" />
-
+            <!-- Configuração do Hibernate -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/> <!-- Cria ou atualiza as tabelas automaticamente -->
+            <property name="hibernate.show_sql" value="true"/> <!-- Exibe as consultas SQL no console -->
         </properties>
     </persistence-unit>
 </persistence>

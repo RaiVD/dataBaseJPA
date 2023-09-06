@@ -1,19 +1,40 @@
 package org.example;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import org.example.model.ProdutoModel;
+import org.example.service.ProdutoService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        // Configura o contexto do Spring
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        // Obtém uma instância do ProdutoService
+        ProdutoService produtoService = context.getBean(ProdutoService.class);
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        // Cria um novo produto
+        ProdutoModel novoProduto = produtoService.criarProduto("Produto 1", 19.99);
+
+        // Recupera um produto por ID e imprime seus detalhes
+        ProdutoModel produtoRecuperado = produtoService.recuperarProdutoPorId(novoProduto.getId());
+        System.out.println("Produto recuperado: " + produtoRecuperado.getNome() + " - Preço: " + produtoRecuperado.getPreco());
+
+        // Atualiza o produto
+        produtoService.atualizarProduto(novoProduto.getId(), "Produto Atualizado", 29.99);
+
+        // Recupera o produto atualizado e imprime seus detalhes
+        produtoRecuperado = produtoService.recuperarProdutoPorId(novoProduto.getId());
+        System.out.println("Produto atualizado: " + produtoRecuperado.getNome() + " - Preço: " + produtoRecuperado.getPreco());
+
+        // Exclui o produto
+        produtoService.excluirProduto(novoProduto.getId());
+
+        // Tenta recuperar o produto excluído
+        produtoRecuperado = produtoService.recuperarProdutoPorId(novoProduto.getId());
+        if (produtoRecuperado == null) {
+            System.out.println("Produto não encontrado (foi excluído).");
         }
     }
 }
+

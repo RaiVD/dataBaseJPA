@@ -1,11 +1,13 @@
-package org.example;
+package org.example.repository;
 
 import org.example.model.ProdutoModel;
 
 public interface ProdutoRepository {
-    ProdutoModel save(ProdutoModel produto);
-    ProdutoModel findById(Long id);
-    void delete(ProdutoModel produto);
+    ProdutoModel criarProduto(ProdutoModel produto);
+    ProdutoModel recuperarProdutoPorId(Long id);
+    ProdutoModel atualizarProduto(ProdutoModel produto);
+    void excluirProduto(Long id);
 }
+
 
 

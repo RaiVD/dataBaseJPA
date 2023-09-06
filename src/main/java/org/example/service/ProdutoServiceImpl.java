@@ -1,7 +1,7 @@
-package org.example.repository;
+package org.example.service;
 
 import org.example.model.ProdutoModel;
-import org.example.service.ProdutoService;
+import org.example.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
